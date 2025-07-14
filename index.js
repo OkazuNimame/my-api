@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   res.send('🌐 Railway Node.js サーバーが動いてるよ！');
 });
 // POST /text エンドポイント
-app.post('/text', (req, res) => {
+app.post('/texts', (req, res) => {
   const { message } = req.body;
   console.log('受け取ったメッセージ:', message);
   
