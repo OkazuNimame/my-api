@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 app.post('/text', (req, res) => {
   const { message } = req.body;
   console.log('受け取ったメッセージ:', message);
-
+  
   res.json({
     response: `受け取ったよ: ${message}`
   });
