@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const multer = require('multer');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require('dotenv').config(); // ✅ これが正解
+const express = require("express");
+const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const app = express();
 
@@ -17,21 +17,21 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'flutter_uploads',
-    allowed_formats: ['jpg', 'png', 'jpeg'],
+    folder: "flutter_uploads",
+    allowed_formats: ["jpg", "png", "jpeg"],
   },
 });
 
 const upload = multer({ storage });
 
 // POST /upload エンドポイント
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post("/upload", upload.single("image"), (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ error: 'ファイルがありません' });
+    return res.status(400).json({ error: "ファイルがありません" });
   }
 
   res.json({
-    message: 'アップロード成功',
+    message: "アップロード成功",
     url: req.file.path,
   });
 });
@@ -39,4 +39,9 @@ app.post('/upload', upload.single('image'), (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+
+  console.log("Cloud name:", process.env.CLOUDINARY_CLOUD_NAME);
+  console.log("API Key:", process.env.CLOUDINARY_API_KEY);
+  console.log("API Secret:", process.env.CLOUDINARY_API_SECRET);
+  
 });
